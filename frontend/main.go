@@ -22,21 +22,11 @@ type pageView struct {
 func (p *pageView) Render() vecty.ComponentOrHTML {
 	exactMatchOpts := router.NewRouteOpts{ExactMatch: true}
 	return elem.Body(
-		router.NewRoute("/", &home{}, exactMatchOpts),
-		router.NewRoute("/created/{link}", &created{}, exactMatchOpts),
+		elem.Div(
+			vecty.Markup(vecty.Class("container")),
+			router.NewRoute("/", &home{}, exactMatchOpts),
+		),
 	)
-	// 	elem.Div(
-	// 		vecty.Markup(prop.ID("container")),
-	// 		component.Header("Let's Write Some Markdown!"),
-	// 		elem.Div(
-	// 			style.Class("col-sm"),
-	// 			p.markdownRow(),
-	// 		),
-
-	// 		// Render the markdown.
-	// 		&Markdown{Input: p.Input},
-	// 	),
-	// )
 }
 
 // Markdown is a simple component which renders the Input markdown as sanitized

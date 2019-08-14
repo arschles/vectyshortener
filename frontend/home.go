@@ -8,6 +8,7 @@ import (
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/event"
 	uuid "github.com/satori/go.uuid"
+	router "marwan.io/vecty-router"
 )
 
 type home struct {
@@ -23,12 +24,19 @@ func (h *home) Render() vecty.ComponentOrHTML {
 			elem.Input(vecty.Markup(
 				event.Input(func(e *vecty.Event) {
 					short := uuid.NewV4().String()[0:5]
-					h.shortened = fmt.Sprintf("rad.shortener.co/%s", short)
+					h.shortened = short
 					vecty.Rerender(h)
 				}),
 			)),
 		),
 		elem.Div(vecty.Text(h.shortened)),
+		elem.Div(
+			router.Link(
+				fmt.Sprintf("/created/%s", h.shortened),
+				"Create",
+				router.LinkOptions{Class: "link"},
+			),
+		),
 	)
 }
 
