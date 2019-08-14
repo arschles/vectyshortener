@@ -1,14 +1,11 @@
 package main
 
 import (
-	"github.com/arschles/vectyshortener/frontend/component"
-	"github.com/arschles/vectyshortener/frontend/style"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
-	"github.com/gopherjs/vecty/prop"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/slimsag/blackfriday"
-	"marwan.io/vecty-router"
+	router "marwan.io/vecty-router"
 )
 
 func main() {
@@ -23,19 +20,23 @@ type pageView struct {
 
 // Render implements the vecty.Component interface.
 func (p *pageView) Render() vecty.ComponentOrHTML {
+	exactMatchOpts := router.NewRouteOpts{ExactMatch: true}
 	return elem.Body(
-		elem.Div(
-			vecty.Markup(prop.ID("container")),
-			component.Header("Let's Write Some Markdown!"),
-			elem.Div(
-				style.Class("col-sm"),
-				p.markdownRow(),
-			),
-
-			// Render the markdown.
-			&Markdown{Input: p.Input},
-		),
+		router.NewRoute("/", &home{}, exactMatchOpts),
+		router.NewRoute("/created/{link}", &created{}, exactMatchOpts),
 	)
+	// 	elem.Div(
+	// 		vecty.Markup(prop.ID("container")),
+	// 		component.Header("Let's Write Some Markdown!"),
+	// 		elem.Div(
+	// 			style.Class("col-sm"),
+	// 			p.markdownRow(),
+	// 		),
+
+	// 		// Render the markdown.
+	// 		&Markdown{Input: p.Input},
+	// 	),
+	// )
 }
 
 // Markdown is a simple component which renders the Input markdown as sanitized

@@ -12,5 +12,5 @@ require (
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/slimsag/blackfriday v2.0.0+incompatible
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
-	marwan.io/vecty-router v0.0.0-20190701140924-0b5c86ca8801 // indirect
+	marwan.io/vecty-router v0.0.0-20190701140924-0b5c86ca8801
 )

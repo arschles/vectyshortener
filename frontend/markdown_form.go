@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/arschles/vectyshortener/frontend/style"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/event"
@@ -9,7 +8,6 @@ import (
 
 func (p *pageView) markdownRow() vecty.ComponentOrHTML {
 	return elem.Div(
-		style.Class("col-md-4 mb-3"),
 		elem.TextArea(
 			vecty.Markup(
 				vecty.Style("font-family", "monospace"),
