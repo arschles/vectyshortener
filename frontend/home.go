@@ -22,8 +22,8 @@ func (h *home) Render() vecty.ComponentOrHTML {
 		elem.Form(
 			elem.Input(vecty.Markup(
 				event.Input(func(e *vecty.Event) {
-					val := e.Target.Get("value").String()
-					h.shortened = fmt.Sprintf("rad.shortener.co/%s", shorten(val)[0:5])
+					short := uuid.NewV4().String()[0:5]
+					h.shortened = fmt.Sprintf("rad.shortener.co/%s", short)
 					vecty.Rerender(h)
 				}),
 			)),
@@ -32,6 +32,6 @@ func (h *home) Render() vecty.ComponentOrHTML {
 	)
 }
 
-func shorten(s string) string {
+func shorten() string {
 	return uuid.NewV4().String()
 }
