@@ -23,12 +23,7 @@ func (h *home) Render() vecty.ComponentOrHTML {
 			elem.Input(vecty.Markup(
 				event.Input(func(e *vecty.Event) {
 					val := e.Target.Get("value").String()
-					shortened, err := shorten(val)
-					if err != nil {
-						// what should we do if it fails???
-						return
-					}
-					h.shortened = fmt.Sprintf("rad.shortener.co/%s", shortened)
+					h.shortened = fmt.Sprintf("rad.shortener.co/%s", shorten(val)[0:5])
 					vecty.Rerender(h)
 				}),
 			)),
@@ -37,10 +32,6 @@ func (h *home) Render() vecty.ComponentOrHTML {
 	)
 }
 
-func shorten(s string) (string, error) {
-	u, err := uuid.NewV4()
-	if err != nil {
-		return err
-	}
-	return u
+func shorten(s string) string {
+	return uuid.NewV4().String()
 }
